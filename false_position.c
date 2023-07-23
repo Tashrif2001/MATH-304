@@ -3,7 +3,7 @@
 #define tol 10.e-6
 double val(double x)
 {
-    return x*x*x + 4 * x*x - 10;
+    return pow(x,3) + 4 * pow(x,2) - 10;
 }
 
 int main()
