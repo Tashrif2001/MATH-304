@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include<math.h>
 #define R 3
-#define tol 10.e-6
+#define tol 10.e-3
 
 int check(double mat[R][R]) {
     double sum = 0;
@@ -26,7 +26,7 @@ void jacob(double mat[R][R], double B[R][1]) {
         for (int j = 0; j < R; j++) {
             if (i == j) {
                 diag[i][j] = mat[i][j];
-                diagInv[i][j] = 1 / mat[i][j];
+                diagInv[i][j] = 1 / diag[i][j];
             } else {
                 diag[i][j] = 0;
                 diagInv[i][j] = 0;
@@ -38,20 +38,21 @@ void jacob(double mat[R][R], double B[R][1]) {
     int iter = 1; 
     while (1) {
     	double tempSum[R][1] = {0,0,0};
-        for (int i = 0,k=0; i < R; i++,k++) {
+        for (int i = 0; i < R; i++) {
             for (int j = 0; j < R; j++) {
                 if (i != j)
-                    tempSum[i][0] += (mat[i][j]) * x0[i][0];
+                    tempSum[i][0] += (mat[i][j] * x0[j][0]);
             }
         }
-
+	
         for (int i = 0; i < R; i++)
             tempSum[i][0] = B[i][0] - tempSum[i][0];
 
         for (int i = 0; i < R; i++) {
             for (int j = 0; j < R; j++) {
-                x1[i][0] = tempSum[i][0] * diagInv[i][j];
+                x1[i][0] = tempSum[i][0] * diagInv[i][i];
             }
+          
         }
 
         int count = 0;
