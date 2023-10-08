@@ -34,7 +34,7 @@ void jacob(double mat[R][R], double B[R][1]) {
         }
     }
 
-    
+    printf("\nx0--------x1--------x2\n");
     int iter = 1; 
     while (1) {
     	double tempSum[R][1] = {0,0,0};
@@ -63,12 +63,11 @@ void jacob(double mat[R][R], double B[R][1]) {
         if (count == 3)
             break;
 
-        printf("Iter %d: \n", iter);
-
         for (int i = 0; i < R; i++) {
             x0[i][0] = x1[i][0];
             printf("%lf ", x0[i][0]);
         }
+        printf("\n");
         iter++;
     }
 }
