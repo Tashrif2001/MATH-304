@@ -19,21 +19,8 @@ int check(double mat[R][R]) {
 }
 
 void jacob(double mat[R][R], double B[R][1]) {
-    double diag[R][R], diagInv[R][R];
     double x0[R][1] = {{0}, {0}, {0}}, x1[R][1];
-    // Taking diag
-    for (int i = 0; i < R; i++) {
-        for (int j = 0; j < R; j++) {
-            if (i == j) {
-                diag[i][j] = mat[i][j];
-                diagInv[i][j] = 1 / diag[i][j];
-            } else {
-                diag[i][j] = 0;
-                diagInv[i][j] = 0;
-            }
-        }
-    }
-
+    
     printf("\nx0--------x1--------x2\n");
     int iter = 1; 
     while (1) {
@@ -50,7 +37,7 @@ void jacob(double mat[R][R], double B[R][1]) {
 
         for (int i = 0; i < R; i++) {
             for (int j = 0; j < R; j++) {
-                x1[i][0] = tempSum[i][0] * diagInv[i][i];
+                x1[i][0] = tempSum[i][0] / mat[i][i];
             }
           
         }
